@@ -1,4 +1,4 @@
-// remove the unbalanced perantheses in a given string
+// remove the unbalanced parentheses in a given string
 // input : (((ab)  ouptut : (ab)
 // intput : ((abc)((de)) output: (abc)((de))
  public class Main
