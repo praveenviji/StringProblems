@@ -1,0 +1,61 @@
+/*
+find first occurrence of all Characters of the Second string in the first
+string and print the substring between the smalllest and largest indeces;
+input :
+       String 1 : ZOHOCORPORATION
+       String 2 : PORT
+output :
+       OHOCORPORAT
+*/
+
+public class Main{
+    
+    public static void main(String []args)
+    {
+        String str1="ZOHOCORPORATION";
+        String  str2="PORT";
+        
+        System.out.println(getSubStringInRange(str1,str2));
+    }
+    
+    public static String getSubStringInRange(String str1 ,String  str2)
+    {
+        int minIndex=Integer.MAX_VALUE;
+        int maxIndex=Integer.MIN_VALUE;
+        
+        for(int i=0;i<str2.length();i++)
+        {
+            char ch=str2.charAt(i);
+            
+            for(int j=0;j<str1.length();j++)
+            {
+                if(ch==str1.charAt(j))
+                {
+                    if(j<minIndex)
+                    {
+                        minIndex=j;
+                    }
+                    if(j>maxIndex)
+                    {
+                        maxIndex=j;
+                    }
+                    
+                    break;
+                }
+            }
+        }
+        
+        if(maxIndex==Integer.MIN_VALUE || minIndex==Integer.MAX_VALUE)
+        {
+            return "";
+        }
+        
+        StringBuilder result = new StringBuilder();
+        for(int i=minIndex;i<=maxIndex;i++)
+        {
+            result.append(str1.charAt(i));
+        }
+        
+        return result.toString();
+    }
+}
