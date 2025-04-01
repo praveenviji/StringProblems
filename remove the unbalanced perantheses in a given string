@@ -1,0 +1,72 @@
+// remove the unbalanced perantheses in a given string
+// input : (((ab)  ouptut : (ab)
+// intput : ((abc)((de)) output: (abc)((de))
+ public class Main
+{
+	public static void main(String[] args) {
+	
+	
+	           String str="(((ab)";
+	           
+	           char a[]=str.toCharArray();
+	           
+	           int open =0,close=0;
+	           
+	           for(int i=0;i<a.length;i++)
+	           {
+	               if(a[i]=='(')
+	               {
+	                   open++;
+	               }
+	               
+	               else if(a[i]==')')
+	               {
+	                   close++;
+	               }
+	               
+	               
+	               if(close>open)
+	               {
+	                   a[i]='1';
+	                   close=0;
+	                   open=0;
+	               }
+	           }
+	           
+	           open =0;
+	           close=0;
+	           
+	           for(int i=a.length-1;i>=0;i--)
+	           {
+	               if(a[i]==')')
+	               {
+	                   close++;
+	               }
+	               
+	               else if(a[i]=='(')
+	               {
+	                   open++;
+	               }
+	               
+	               
+	               if(open>close)
+	               {
+	                   a[i]='1';
+	                   close=0;
+	                   open=0;
+	               }
+	           }
+	           
+	           StringBuilder result=new StringBuilder();
+	           
+	           for(int i=0;i<a.length;i++)
+	           {
+	               if(a[i]!='1')
+	               {
+	                   result.append(a[i]);
+	               }
+	           }
+	           
+	           System.out.println(result);
+	}
+}
