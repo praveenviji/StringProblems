@@ -1,0 +1,54 @@
+/******************************************************************************
+ 
+return longest substring length without repeating character 
+input : "abcabcbb"
+output: 3 
+explantions : non-repeating substrings are "a","b" ,"c" "abc" , "abc","bc"
+max length is 3
+
+input : "pwwkew"
+output : 3 . "p","w","k","pw","wke"
+
+*******************************************************************************/
+import  java.util.*;
+public class Main
+{
+	public static void main(String[] args) {
+		
+		String str1="abcabcbb";
+		
+		System.out.println(longestSubstringWithoutRepeartingCharacters(str1));
+		
+		String str2="pwwkew";
+		
+		System.out.println(longestSubstringWithoutRepeartingCharacters(str2));
+		
+		String str3="Aaabbkkppe#@@";
+		
+		System.out.println(longestSubstringWithoutRepeartingCharacters(str3));
+		
+	}
+	
+	public static int longestSubstringWithoutRepeartingCharacters(String str)
+	{
+	    int left=0,right=0;
+	    int length = 1;
+	    HashSet<Character> charset = new HashSet<>(); 
+	    while(right<str.length())
+	    {
+	        while(charset.contains(str.charAt(right)))
+	        {
+	            charset.remove(str.charAt(left));
+	            left++;
+	        }
+	        
+	        charset.add(str.charAt(right));
+	        
+	        length = Math.max(length,right-left+1);
+	        
+	        right++;
+	    }
+	    
+	    return length;
+	}
+}
