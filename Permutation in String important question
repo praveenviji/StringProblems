@@ -1,0 +1,99 @@
+/******************************************************************************
+Given two strings s1 and s2, return true if s2 contains a permutation of s1, or false otherwise.
+
+In other words, return true if one of s1's permutations is the substring of s2.
+
+ 
+
+Example 1:
+
+Input: s1 = "ab", s2 = "eidbaooo"
+Output: true
+Explanation: s2 contains one permutation of s1 ("ba").
+Example 2:
+
+Input: s1 = "ab", s2 = "eidboaoo"
+Output: false
+
+*******************************************************************************/
+import java.util.*; 
+public class Main
+{
+	public static void main(String[] args) {
+		
+		String str1 = "abbc" , str2 = "eiodbaaoabcb";
+		
+		System.out.println(permutationInString(str1,str2));
+	}
+	
+	public static boolean permutationInString(String str1 , String str2)
+	{
+	    
+	    if(str1.length()>str2.length() || str1.length()<=1 || str2.length()<=1)
+	    {
+	        return false;
+	    }
+	    
+	    
+	    
+	    HashMap<Character ,Integer> have = new HashMap<>();
+	     HashMap<Character ,Integer> need = new HashMap<>();
+	     
+	     for(int i=0;i<str1.length();i++)
+	     {
+	         char c = str1.charAt(i);
+	         if(need.containsKey(c))
+	         {
+	             need.put(c,need.get(c)+1);
+	         }
+	         else
+	         {
+	             need.put(c,1);
+	         }
+	     }
+	     
+	     int start =0,end=0;
+	     
+	     while(end<str2.length())
+	     {
+	         char c = str2.charAt(end);
+	         if(!need.containsKey(c))
+	         {
+	             end++;
+	             start=end;
+	             have.clear();
+	             continue;
+	         }
+	         
+	         if(have.containsKey(c))
+	         {
+	             have.put(c,have.get(c)+1);
+	         }
+	         
+	         else
+	         {
+	             have.put(c,1);
+	         }
+	         
+	         
+	         while(have.get(c)>need.get(c))
+	         {
+	             char ch = str2.charAt(start);
+	             have.put(ch,have.get(ch)-1);
+	             start++;
+	         }
+	         
+	         int window = end-start+1;
+	         
+	         if(window==str1.length())
+	         {
+	             return true;
+	         }
+	         
+	         end++;
+	     }
+	     
+	     return false;
+	}
+	
+}
